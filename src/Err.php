@@ -33,7 +33,7 @@ final class Err extends Result
      * @template U
      * @param mixed $default
      * @psalm-param U $default
-     * @param callable:U $callback
+     * @param callable(mixed):U $callback
      * @return mixed
      * @psalm-return U
      */
