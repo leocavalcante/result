@@ -14,5 +14,9 @@
             <directory suffix=".php">./app</directory>
             <directory suffix=".php">./src</directory>
         </include>
+        <report>
+            <clover outputFile="clover.xml"/>
+        </report>
     </coverage>
+
 </phpunit>
