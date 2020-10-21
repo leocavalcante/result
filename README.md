@@ -1,4 +1,4 @@
-# Result
+# Result ![CI](https://github.com/leocavalcante/result/workflows/CI/badge.svg?branch=main)
 
 🎁 Result provides an alternative error handling mechanism, avoiding throwing exceptions, and a better data flow control.
 
