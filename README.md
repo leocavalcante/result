@@ -1,4 +1,7 @@
-# Result ![CI](https://github.com/leocavalcante/result/workflows/CI/badge.svg?branch=main)
+# Result
+
+![CI](https://github.com/leocavalcante/result/workflows/CI/badge.svg?branch=main)
+![Type coverage](https://shepherd.dev/github/leocavalcante/result/coverage.svg)
 
 🎁 Result provides an alternative error handling mechanism, avoiding throwing exceptions, and a better data flow control.
 
