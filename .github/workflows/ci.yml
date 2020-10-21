@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -32,3 +31,6 @@ jobs:
 
     - name: Run test suite
       run: composer run-script check
+      
+    - name: Code coverage
+      uses: codecov/codecov-action@v1.0.14
