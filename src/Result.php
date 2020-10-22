@@ -79,4 +79,12 @@ abstract class Result
      * @psalm-return U
      */
     abstract public function mapOr($default, callable $callback);
+
+    /**
+     * @template U
+     * @param callable(E|None):U $callback
+     * @return Result
+     * @psalm-return Result<T, U>|Result<T, E>
+     */
+    abstract public function mapErr(callable $callback): Result;
 }

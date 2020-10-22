@@ -36,4 +36,7 @@ it('maps the wrapped value', function () {
 
     assertSame(3, ok('foo')->mapOr(42, 'strlen'));
     assertSame(42, err('foo')->mapOr(42, 'strlen'));
+
+    assertTrue(err(2)->mapErr(fn($a) => $a * $a)->equals(err(4)));
+    assertTrue(ok(2)->mapErr(fn($a) => $a * $a)->equals(ok(2)));
 });

@@ -41,4 +41,15 @@ final class Err extends Result
     {
         return $default;
     }
+
+    /**
+     * @template U
+     * @param callable(E|None):U $callback
+     * @return self
+     * @psalm-return Err<U>
+     */
+    public function mapErr(callable $callback): self
+    {
+        return new self($callback($this->value));
+    }
 }

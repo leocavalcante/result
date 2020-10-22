@@ -41,4 +41,14 @@ final class Ok extends Result
     {
         return $callback($this->value);
     }
+
+    /**
+     * @param callable $callback
+     * @return $this
+     * @psalm-return Ok<T>
+     */
+    public function mapErr(callable $callback): Result
+    {
+        return $this;
+    }
 }
