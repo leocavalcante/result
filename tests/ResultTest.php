@@ -4,6 +4,8 @@ namespace Result\Test;
 
 use Result\Err;
 use Result\Ok;
+use Result\Panic;
+use Result\Result;
 use function PHPUnit\Framework\{assertFalse, assertInstanceOf, assertSame, assertTrue};
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -39,4 +41,12 @@ it('maps the wrapped value', function () {
 
     assertTrue(err(2)->mapErr(fn($a) => $a * $a)->equals(err(4)));
     assertTrue(ok(2)->mapErr(fn($a) => $a * $a)->equals(ok(2)));
+});
+
+it('throws panic when unwrapping err', function () {
+    err('test')->unwrap();
+})->throws(Panic::class, 'test');
+
+it('unwraps value when ok', function() {
+    assertSame(1, ok(1)->unwrap());
 });

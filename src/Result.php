@@ -87,4 +87,10 @@ abstract class Result
      * @psalm-return Result<T, U>|Result<T, E>
      */
     abstract public function mapErr(callable $callback): Result;
+
+    /**
+     * @return mixed
+     * @psalm-return T|E
+     */
+    abstract public function unwrap();
 }

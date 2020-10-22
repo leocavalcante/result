@@ -52,4 +52,12 @@ final class Err extends Result
     {
         return new self($callback($this->value));
     }
+
+    /**
+     * @throws Panic
+     */
+    public function unwrap()
+    {
+        throw new Panic((string)$this->value);
+    }
 }

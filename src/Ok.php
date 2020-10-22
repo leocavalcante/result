@@ -51,4 +51,13 @@ final class Ok extends Result
     {
         return $this;
     }
+
+    /**
+     * @return mixed
+     * @psalm-return T
+     */
+    public function unwrap()
+    {
+        return $this->value;
+    }
 }
