@@ -60,4 +60,14 @@ final class Err extends Result
     {
         throw new Panic((string)$this->value);
     }
+
+    /**
+     * @param string $message
+     * @return mixed
+     * @psalm-return E
+     */
+    public function expectErr(string $message)
+    {
+        return $this->value;
+    }
 }

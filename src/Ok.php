@@ -60,4 +60,13 @@ final class Ok extends Result
     {
         return $this->value;
     }
+
+    /**
+     * @param string $message
+     * @throws Panic
+     */
+    public function expectErr(string $message)
+    {
+        throw new Panic(sprintf("$message: %s", (string)$this->value));
+    }
 }

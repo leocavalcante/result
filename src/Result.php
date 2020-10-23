@@ -90,7 +90,14 @@ abstract class Result
 
     /**
      * @return mixed
-     * @psalm-return T|E
+     * @psalm-return T
      */
     abstract public function unwrap();
+
+    /**
+     * @param string $message
+     * @return mixed
+     * @psalm-return E
+     */
+    abstract public function expectErr(string $message);
 }
