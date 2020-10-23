@@ -14,7 +14,7 @@
     "scripts": {
         "analyze": "psalm --shepherd",
         "test": "pest --coverage --min=90",
-        "check": ["@analyze", "@test"]
+        "make": ["@analyze", "@test"]
     },
     "require": {},
     "autoload": {
