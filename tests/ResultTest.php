@@ -40,3 +40,8 @@ it('maps the wrapped value', function () {
     assertTrue(err(2)->mapErr(fn($a) => $a * $a)->equals(err(4)));
     assertTrue(ok(2)->mapErr(fn($a) => $a * $a)->equals(ok(2)));
 });
+
+it('is Json serializable', function () {
+    expect(json_encode(ok('foo')))->toBe('"foo"');
+    expect(json_encode(err('bar')))->toBe('"bar"');
+});

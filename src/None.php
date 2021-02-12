@@ -2,9 +2,21 @@
 
 namespace Result;
 
-final class None
+use JsonSerializable;
+
+final class None implements JsonSerializable
 {
-    private function __construct()
+    public function __construct()
     {
+    }
+
+    public function jsonSerialize(): string
+    {
+        return 'None';
+    }
+
+    public function __toString(): string
+    {
+        return 'None';
     }
 }

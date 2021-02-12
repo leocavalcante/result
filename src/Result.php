@@ -2,11 +2,13 @@
 
 namespace Result;
 
+use JsonSerializable;
+
 /**
  * @template T
  * @template E
  */
-abstract class Result
+abstract class Result implements JsonSerializable
 {
     /**
      * @var mixed
@@ -60,6 +62,11 @@ abstract class Result
     public function equals(Result $other): bool
     {
         return $other instanceof static && $other->value === $this->value;
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->value;
     }
 
     /**
