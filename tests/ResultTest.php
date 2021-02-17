@@ -2,8 +2,7 @@
 
 namespace Result\Test;
 
-use Result\Err;
-use Result\Ok;
+use Result\{Err, Ok, Panic};
 use function PHPUnit\Framework\{assertFalse, assertInstanceOf, assertSame, assertTrue};
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -39,6 +38,22 @@ it('maps the wrapped value', function () {
 
     assertTrue(err(2)->mapErr(fn($a) => $a * $a)->equals(err(4)));
     assertTrue(ok(2)->mapErr(fn($a) => $a * $a)->equals(ok(2)));
+});
+
+it('throws panic when unwrapping err', function () {
+    err('test')->unwrap();
+})->throws(Panic::class, 'test');
+
+it('unwraps value when ok', function() {
+    assertSame(1, ok(1)->unwrap());
+});
+
+it('throws panic when expecting err in ok', function () {
+    ok(10)->expectErr('Testing expect_err');
+})->throws(Panic::class, 'Testing expect_err: 10');
+
+it('unwraps err value when expected', function() {
+    assertSame('Testing expect_err', err('Testing expect_err')->expectErr('foobar'));
 });
 
 it('is Json serializable', function () {

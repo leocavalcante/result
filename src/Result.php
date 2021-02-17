@@ -94,4 +94,17 @@ abstract class Result implements JsonSerializable
      * @psalm-return Result<T, U>|Result<T, E>
      */
     abstract public function mapErr(callable $callback): Result;
+
+    /**
+     * @return mixed
+     * @psalm-return T
+     */
+    abstract public function unwrap();
+
+    /**
+     * @param string $message
+     * @return mixed
+     * @psalm-return E
+     */
+    abstract public function expectErr(string $message);
 }

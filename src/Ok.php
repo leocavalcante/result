@@ -51,4 +51,22 @@ final class Ok extends Result
     {
         return $this;
     }
+
+    /**
+     * @return mixed
+     * @psalm-return T
+     */
+    public function unwrap()
+    {
+        return $this->value;
+    }
+
+    /**
+     * @param string $message
+     * @throws Panic
+     */
+    public function expectErr(string $message)
+    {
+        throw new Panic(sprintf("$message: %s", (string)$this->value));
+    }
 }
