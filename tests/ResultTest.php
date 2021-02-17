@@ -2,12 +2,8 @@
 
 namespace Result\Test;
 
-use Result\Err;
-use Result\Ok;
-use Result\Panic;
-use Result\Result;
+use Result\{Err, Ok, Panic};
 use function PHPUnit\Framework\{assertFalse, assertInstanceOf, assertSame, assertTrue};
-use function Result\Test\ok;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
