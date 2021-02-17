@@ -59,3 +59,8 @@ it('throws panic when expecting err in ok', function () {
 it('unwraps err value when expected', function() {
     assertSame('Testing expect_err', err('Testing expect_err')->expectErr('foobar'));
 });
+
+it('is Json serializable', function () {
+    expect(json_encode(ok('foo')))->toBe('"foo"');
+    expect(json_encode(err('bar')))->toBe('"bar"');
+});
