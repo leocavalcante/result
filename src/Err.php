@@ -4,13 +4,12 @@ namespace Result;
 
 /**
  * @template E
- * @extends Result<None, E>
+ * @extends Result<E>
  */
 final class Err extends Result
 {
     /**
-     * @var mixed
-     * @psalm-var E
+     * @var E
      */
     protected $value;
 
@@ -20,22 +19,20 @@ final class Err extends Result
     }
 
     /**
-     * @param callable $callback
-     * @return $this
-     * @psalm-return Err<E>
+     * @template U
+     * @param callable(E):U $callback
+     * @return Result<E>
      */
-    public function map(callable $callback): self
+    public function map(callable $callback): Result
     {
         return $this;
     }
 
     /**
      * @template U
-     * @param mixed $default
-     * @psalm-param U $default
+     * @param U $default
      * @param callable(mixed):U $callback
-     * @return mixed
-     * @psalm-return U
+     * @return U
      */
     public function mapOr($default, callable $callback)
     {
@@ -44,27 +41,26 @@ final class Err extends Result
 
     /**
      * @template U
-     * @param callable(E|None):U $callback
-     * @return self
-     * @psalm-return Err<U>
+     * @param callable(E):U $callback
+     * @return Result<U>
      */
-    public function mapErr(callable $callback): self
+    public function mapErr(callable $callback): Result
     {
         return new self($callback($this->value));
     }
 
     /**
+     * @return no-return
      * @throws Panic
      */
-    public function unwrap()
+    public function unwrap(): void
     {
-        throw new Panic((string)$this->value);
+        throw new Panic((string) $this->value);
     }
 
     /**
      * @param string $message
-     * @return mixed
-     * @psalm-return E
+     * @return E
      */
     public function expectErr(string $message)
     {

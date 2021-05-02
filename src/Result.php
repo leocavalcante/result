@@ -6,19 +6,16 @@ use JsonSerializable;
 
 /**
  * @template T
- * @template E
  */
 abstract class Result implements JsonSerializable
 {
     /**
-     * @var mixed
-     * @psalm-var T|E|None
+     * @var T
      */
     protected $value;
 
     /**
-     * @param mixed $value
-     * @psalm-param T|E|None $value
+     * @param T $value
      */
     public function __construct($value)
     {
@@ -27,10 +24,8 @@ abstract class Result implements JsonSerializable
 
     /**
      * @template ST
-     * @param mixed $value
-     * @psalm-param ST $value
-     * @return Ok
-     * @psalm-return Ok<ST>
+     * @param ST $value
+     * @return Ok<ST>
      */
     public static function ok($value): Ok
     {
@@ -39,10 +34,8 @@ abstract class Result implements JsonSerializable
 
     /**
      * @template SE
-     * @param mixed $value
-     * @psalm-param SE $value
-     * @return Err
-     * @psalm-return Err<SE>
+     * @param SE $value
+     * @return Err<SE>
      */
     public static function err($value): Err
     {
@@ -64,47 +57,49 @@ abstract class Result implements JsonSerializable
         return $other instanceof static && $other->value === $this->value;
     }
 
+    /**
+     * @return T
+     */
     public function jsonSerialize()
     {
         return $this->value;
     }
 
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
+
     /**
      * @template U
      * @param callable(T):U $callback
-     * @return Result
-     * @psalm-return Result<U, E>|Result<T, E>
+     * @return Result<U>|Result<T>
      */
     abstract public function map(callable $callback): Result;
 
     /**
      * @template U
-     * @param mixed $default
-     * @psalm-param U $default
+     * @param U $default
      * @param callable(T):U $callback
-     * @return mixed
-     * @psalm-return U
+     * @return Result<U>|U
      */
     abstract public function mapOr($default, callable $callback);
 
     /**
      * @template U
-     * @param callable(E|None):U $callback
-     * @return Result
-     * @psalm-return Result<T, U>|Result<T, E>
+     * @param callable(T):U $callback
+     * @return Result<U>|Result<T>
      */
     abstract public function mapErr(callable $callback): Result;
 
     /**
-     * @return mixed
-     * @psalm-return T
+     * @return T
      */
     abstract public function unwrap();
 
     /**
      * @param string $message
-     * @return mixed
-     * @psalm-return E
+     * @return T
      */
     abstract public function expectErr(string $message);
 }

@@ -4,13 +4,12 @@ namespace Result;
 
 /**
  * @template T
- * @extends Result<T, None>
+ * @extends Result<T>
  */
 final class Ok extends Result
 {
     /**
-     * @var mixed
-     * @psalm-var T
+     * @var T
      */
     protected $value;
 
@@ -22,10 +21,9 @@ final class Ok extends Result
     /**
      * @template U
      * @param callable(T):U $callback
-     * @return self
-     * @psalm-return Ok<U>
+     * @return Result<U>
      */
-    public function map(callable $callback): self
+    public function map(callable $callback): Result
     {
         return new self($callback($this->value));
     }
@@ -34,18 +32,17 @@ final class Ok extends Result
      * @template U
      * @param mixed $default
      * @param callable(T):U $callback
-     * @return mixed
-     * @psalm-return U
+     * @return Result<U>
      */
-    public function mapOr($default, callable $callback)
+    public function mapOr($default, callable $callback): Result
     {
-        return $callback($this->value);
+        return new self($callback($this->value));
     }
 
     /**
-     * @param callable $callback
-     * @return $this
-     * @psalm-return Ok<T>
+     * @template U
+     * @param callable(T):U $callback
+     * @return Result<T>
      */
     public function mapErr(callable $callback): Result
     {
@@ -53,8 +50,7 @@ final class Ok extends Result
     }
 
     /**
-     * @return mixed
-     * @psalm-return T
+     * @return T
      */
     public function unwrap()
     {
@@ -63,10 +59,11 @@ final class Ok extends Result
 
     /**
      * @param string $message
+     * @return no-return
      * @throws Panic
      */
-    public function expectErr(string $message)
+    public function expectErr(string $message): void
     {
-        throw new Panic(sprintf("$message: %s", (string)$this->value));
+        throw new Panic(sprintf("$message: %s", (string) $this->value));
     }
 }
