@@ -7,3 +7,11 @@
 🎁 Result provides an alternative error handling mechanism, avoiding throwing exceptions or using nulls.
 
 > Heavily inspired by [Rust's Result](https://doc.rust-lang.org/std/result/).
+
+## Why avoid nulls?
+
+TODO: Talk about null-safety.
+
+## Why avoid exceptions?
+
+TODO: Talk about resilience.
