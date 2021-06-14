@@ -4,6 +4,6 @@
 ![Type coverage](https://shepherd.dev/github/leocavalcante/result/coverage.svg)
 ![Code coverage](https://codecov.io/gh/leocavalcante/result/branch/main/graph/badge.svg?token=MERRHTNUPS)
 
-🎁 Result provides an alternative error handling mechanism, avoiding throwing exceptions, and a better data flow control.
+🎁 Result provides an alternative error handling mechanism, avoiding throwing exceptions or using nulls.
 
 > Heavily inspired by [Rust's Result](https://doc.rust-lang.org/std/result/).
